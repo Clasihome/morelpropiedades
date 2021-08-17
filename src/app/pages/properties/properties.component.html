@@ -1,0 +1,163 @@
+<!-- Titlebar
+================================================== -->
+<div
+  class="parallax titlebar"
+  style="background-image: url('./assets/images/banner_web.jpg');"
+>
+  <div id="titlebar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Propiedades</h2>
+
+          <!-- Breadcrumbs -->
+          <nav id="breadcrumbs">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><b>Propiedades</b></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="container" style="min-height: 350px !important;">
+  <div class="row fullwidth-layout">
+    <ngx-spinner size="medium" type="ball-circus" [fullScreen]="true">
+      <p style="color: #fff !important; margin-top: 30px;">
+        <br /><b>Morel Propiedades</b> <br /><br />Aguarde por favor...
+      </p>
+    </ngx-spinner>
+    <section
+      class="col-md-12 fullwidth-layout margin-top-20 text-center"
+      *ngIf="properties.length === 0 && !loadingProperties"
+    >
+      <h3 class="headline-box margin-bottom-15">
+        No se encontraron propiedades disponibles.
+      </h3>
+      <br />
+      <a class="button margin-bottom-20" routerLink="home">Ir al inicio</a>
+    </section>
+    <div class="col-md-12" *ngIf="properties.length > 0">
+      <!-- Sorting / Layout Switcher -->
+      <div class="row margin-bottom-15">
+        <div class="col-md-6">
+          <!-- Sort by -->
+          <p>{{ results }}</p>
+        </div>
+
+        <div class="col-md-6">
+          <div class="sort-by" style="float: right;">
+            <select (change)="changeOrder($event)">
+              <option value="ASC">Precio ascendente</option>
+              <option value="DESC">Precio descendente</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listings -->
+      <div class="listings-container list-layout">
+        <!-- Listing Item -->
+        <div
+          class="listing-item animated fadeIn slow"
+          *ngFor="let p of properties"
+        >
+        <app-card-propiedad [p]="p"></app-card-propiedad>
+         <!--  <a
+            [routerLink]="['/property-detail', p.id]"
+            class="listing-img-container"
+          >
+            <div class="listing-badges">
+              <span>{{ p.operacion }}</span>
+            </div>
+
+            <div class="listing-img-content">
+              <span class="listing-price"
+                >{{ p.uf }} <i>{{ p.pesos }}</i></span
+              >
+            </div>
+
+            <div class="listing-carousel">
+              <div><img src="{{ p.img_destacada }}" alt="" /></div>
+            </div>
+          </a>
+
+          <div class="listing-content">
+            <div class="listing-title">
+              <h4 style="margin-bottom: 0px !important;">
+                <a [routerLink]="['/property-detail', p.id]">
+                  {{ p.tipo }}<span *ngIf="p.comuna"> en {{ p.sector }}</span>
+
+                  <span
+                    style="font-weight: 400; text-transform: uppercase;"
+                    *ngIf="p.condominio"
+                  >
+                    | {{ p.condominio }}</span
+                  >
+                </a>
+              </h4>
+              <p style="margin: 0px 0px 20px 0px !important; font-size: 12px;">
+                <i class="fa fa-map-marker"></i>
+                {{ p.sector }}
+              </p>
+
+              <a
+                [routerLink]="['/property-detail', p.id]"
+                class="details button border"
+                >Ver Detalles</a
+              >
+            </div>
+            <div class="listing-footer">
+              <div
+                style="color: #222222 !important;"
+                [innerHtml]="
+                  p.descripcion.length > 140
+                    ? (p.descripcion | slice: 0:140) + '...'
+                    : (p.descripcion | html: 'html')
+                "
+              ></div>
+            </div>
+
+            <ul class="listing-details">
+              <li>{{ p.sup_total }} mt<sup>2</sup> total</li>
+              <li>{{ p.sup_const }} mt<sup>2</sup> útil</li>
+              <li>{{ p.habitaciones }} Habitacione/s</li>
+              <li>{{ p.banios }} Baño/s</li>
+            </ul>
+          </div> -->
+        </div>
+        <!-- Listing Item / End -->
+      </div>
+      <!-- Listings Container / End -->
+
+      <div class="clearfix"></div>
+      <!-- Pagination -->
+      <div class="pagination-container margin-top-20">
+        <nav class="pagination">
+          <ul>
+            <li>
+              <a class="detalle-pagination current-page"
+                >Página {{ currentPage }} de {{ lastPage }}</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="pagination-next-prev">
+          <ul>
+            <li>
+              <a (click)="getPage(previousPage)" class="prev">Anterior</a>
+            </li>
+            <li><a (click)="getPage(nextPage)" class="next">Siguiente</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Pagination / End -->
+    </div>
+  </div>
+</div>

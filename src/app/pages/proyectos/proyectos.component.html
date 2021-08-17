@@ -1,0 +1,125 @@
+<!-- Titlebar
+================================================== -->
+<div
+  class="animated fadeIn slow"
+  id="proyectos-banner"
+  style="background-image: url(./assets/images/proyectos2.png)"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container-title">
+          <!-- Form -->
+          <h2>Proyectos</h2>
+        </div>
+        <div class="container-logo">
+          <!-- Form -->
+          <img src="./assets/images/logo-con-cangrejo.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="container-fluid background-inverse">
+  <div class="row fullwidth-layout">
+    <ngx-spinner size="medium" type="ball-circus" [fullScreen]="true">
+      <p style="color: #fff !important; margin-top: 30px">
+        <br /><b>Morel Propiedades</b> <br /><br />Aguarde por favor...
+      </p>
+    </ngx-spinner>
+    <section
+      class="col-md-12 fullwidth-layout margin-top-20 text-center"
+      *ngIf="proyectos.length === 0 && !loading"
+    >
+      <h3 class="headline-box margin-bottom-15">
+        No se encontraron proyectos disponibles.
+      </h3>
+      <br />
+      <a class="button margin-bottom-20" href="/">Ir al inicio</a>
+    </section>
+    <div
+      class="col-md-12 margin-top-35"
+      *ngIf="proyectos.length > 0 && !loading"
+    >
+      <!-- Listings -->
+      <div
+        class="listings-container list-layout container"
+        *ngFor="let p of proyectos"
+      >
+        <!-- Listing Item -->
+        <div class="listing-item animated fadeIn slow">
+          <a
+            [routerLink]="['/property-detail', p.id]"
+            class="listing-img-container"
+          >
+            <div class="listing-badges">
+              <span>PROYECTO INMOBILIARIO</span>
+            </div>
+
+            <div class="listing-img-content">
+              <span class="listing-price">Desde {{ p.uf }}</span>
+            </div>
+
+            <div class="listing-carousel">
+              <div>
+                <img src="{{ p.img_destacada }}" alt="" />
+              </div>
+            </div>
+          </a>
+
+          <div class="listing-content">
+            <div class="listing-title">
+              <h4 style="margin-bottom: 0px !important">
+                <a>
+                  {{ p.titulo }}
+                  <span
+                    style="font-weight: 400; text-transform: uppercase"
+                    *ngIf="p.condominio"
+                  >
+                    | {{ p.condominio }}</span
+                  >
+                </a>
+              </h4>
+              <p style="margin: 0px 0px 20px 0px !important; font-size: 12px">
+                <i class="fa fa-map-marker"></i>
+                {{ p.sector }}
+              </p>
+
+              <a
+                [routerLink]="['/property-detail', p.id]"
+                class="details button border"
+                >Ver y Cotizar</a
+              >
+            </div>
+            <div class="listing-footer" style="padding-bottom: 20px">
+              <div
+                style="color: #ffffff !important"
+                [innerHtml]="
+                  p.descripcion.length > 240
+                    ? (p.descripcion | slice: 0:240) + '...'
+                    : (p.descripcion | html: 'html')
+                "
+              ></div>
+            </div>
+
+            <!--
+                        <ul class="listing-details">
+                            <li>{{proyectos.sup_total}} mt<sup>2</sup> total</li>
+                            <li>{{proyectos.sup_const}} mt<sup>2</sup> útil</li>
+                            <li>{{proyectos.habitaciones}} Habitacione/s</li>
+                            <li>{{proyectos.banios}} Baño/s</li>
+                        </ul>
+-->
+          </div>
+        </div>
+        <!-- Listing Item / End -->
+      </div>
+      <!-- Listings Container / End -->
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "sector_id": 5,
+    "leyenda": "Maitencillo",
+    "sector": "Maitencillo",
+    "condominio": ""
+  },
+
+  {
+    "id": 2,
+    "sector_id": 54,
+    "leyenda": "Marbella",
+    "sector": "Marbella",
+    "condominio": ""
+  },
+  {
+    "id": 3,
+    "sector_id": 40,
+    "leyenda": "Cachagua",
+    "sector": "Cachagua",
+    "condominio": ""
+  },
+  {
+    "id": 4,
+    "sector_id": 69,
+    "leyenda": "Zapallar",
+    "sector": "Zapallar",
+    "condominio": ""
+  },
+  {
+    "id": 5,
+    "sector_id": 55,
+    "leyenda": "Papudo",
+    "sector": "Papudo",
+    "condominio": ""
+  },
+  {
+    "id": 6,
+    "sector_id": 46,
+    "leyenda": "Horcón",
+    "sector": "Horcón",
+    "condominio": ""
+  },
+  {
+    "id": 7,
+    "sector_id": 57,
+    "leyenda": "Puchuncaví",
+    "sector": "Puchuncaví",
+    "condominio": ""
+  },
+  {
+    "id": 8,
+    "sector_id": 128,
+    "leyenda": "Catapilco",
+    "sector": "Catapilco",
+    "condominio": ""
+  },
+  {
+    "id": 9,
+    "sector_id": 49,
+    "leyenda": "Los Molles",
+    "sector": "Los Molles",
+    "condominio": ""
+  },
+  {
+    "id": 10,
+    "sector_id": 53,
+    "leyenda": "Mantagua",
+    "sector": "Mantagua",
+    "condominio": ""
+  },
+  {
+    "id": 11,
+    "sector_id": 47,
+    "leyenda": "Quintero - Valle Alegre",
+    "sector": "Quintero - Valle Alegre",
+    "condominio": ""
+  },
+  {
+    "id": 12,
+    "sector_id": 59,
+    "leyenda": "Quintero - Ritoque",
+    "sector": "Quintero - Ritoque",
+    "condominio": ""
+  },
+  {
+    "id": 13,
+    "sector_id": 56,
+    "leyenda": "Pichicuy",
+    "sector": "Pichicuy",
+    "condominio": ""
+  },
+  {
+    "id": 14,
+    "sector_id": 51,
+    "leyenda": "Los Vilos",
+    "sector": "Los Vilos",
+    "condominio": ""
+  }
+]

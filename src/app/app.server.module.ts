@@ -1,0 +1,13 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ServerModule } from "@angular/platform-server";
+
+import { AppModule } from "./app.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+@NgModule({
+  imports: [AppModule, ServerModule, BrowserAnimationsModule],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AppServerModule {}

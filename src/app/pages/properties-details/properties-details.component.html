@@ -1,0 +1,594 @@
+<div
+  class="container"
+  style="min-height: 350px !important;"
+  *ngIf="error && !loadingProperties"
+>
+  <div class="row fullwidth-layout">
+    <section
+      class="col-md-12 fullwidth-layout margin-top-20 text-center"
+      style="min-height: 450px;"
+    >
+      <br /><br />
+      <br /><br />
+      <h3 class="headline-box margin-bottom-15">
+        No se encontraron propiedades disponibles.
+      </h3>
+      <br />
+      <a class="button margin-bottom-20" routerLink="home">Ir al inicio</a>
+    </section>
+  </div>
+</div>
+<!-- titulobar
+================================================== -->
+<div style="min-height: 450px;" *ngIf="!error">
+  <div
+    class="parallax titlebar"
+    style="background-image: url('./assets/images/banner_web.jpg');"
+  >
+    <div id="titlebar" *ngIf="!loadingProperties">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Detalle de la propiedad</h2>
+
+            <!-- Breadcrumbs -->
+            <nav id="breadcrumbs">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Propiedades</a></li>
+                <li>
+                  <b>{{ property.propertyType }} en {{ property.ubication.comunne }}</b>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="titlebar"
+    class="property-titlebar margin-top-0 padding-top-0 margin-bottom-0"
+  >
+    <div class="container" *ngIf="!loadingProperties">
+      <div class="row">
+        <div class="col-md-12 margin-bottom-10">
+          <div class="">
+            <h2>{{ property.title }}</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="">
+            <!-- Main Features -->
+            <blockquote>
+              <ul class="property-main-features">
+                <li>
+                  Operación: <span>{{ property.operation }}</span>
+                </li>
+                <li>
+                  Tipo: <span>{{ property.propertyType }}</span>
+                </li>
+               <!--  <li>
+                  Sector: <span>{{ property.sector }}</span>
+                </li> -->
+                <li>
+                  Estado: <span>{{ property.status }}</span>
+                </li>
+              </ul>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="container">
+    <div class="row">
+      <!-- Property Description -->
+      <div class="col-lg-8 col-md-7">
+        <div class="row" *ngIf="!loadingProperties">
+          <div class="fullwidth-property-slider margin-bottom-50 text-center">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="galleryImages"
+            ></ngx-gallery>
+          </div>
+        </div>
+
+        <div class="property-description">
+          <div class="row" *ngIf="!loadingProperties">
+            <div class="col-md-2 col-sm-3 col-xs-3">
+              <i class="fa fa-bed" style="color: #47525d !important;"></i>
+              {{ _getValueCharByName("Habitaciones") }}
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3">
+              <i
+                class="im im-icon-Bathrobe"
+                style="color: #47525d !important;"
+              ></i>
+              {{ _getValueCharByName("Baños") }}
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3">
+              <i
+                class="fa fa-automobile"
+                style="color: #47525d !important;"
+              ></i>
+              {{ _getValueCharByName("Estacionamientos") }}
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 content-price">
+              <p class="text-price">{{ property.value | formatCurrency: property.currency }}</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <h3 class="desc-headline" *ngIf="!loadingProperties">Descripción</h3>
+          <div
+            style="color: #222222 !important;"
+            [innerHtml]="property.publicObservations | html: 'html'"
+            *ngIf="!loadingProperties"
+          ></div>
+          <!-- <div
+            *ngIf="
+              property &&
+              !loadingProperties &&
+              property.characteristics.length > 0
+            "
+          >
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="desc-headline">Características</h3>
+            </div>
+            <div
+              class="col-md-4 col-sm-6 col-xs-6"
+              *ngFor="let c of property.characteristics"
+            >
+              <i
+                class="fa fa-check"
+                aria-hidden="true"
+                style="color: #47525d !important;"
+              ></i>
+              {{ c }}
+            </div>
+          </div> -->
+
+       <!--    <div
+            *ngIf="property && !loadingProperties && property.playas.length > 0"
+          >
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="desc-headline">Playas</h3>
+            </div>
+            <div
+              class="col-md-6 col-sm-12 col-xs-12"
+              *ngFor="let c of property.playas"
+            >
+              <i
+                class="fa fa-check-circle-o"
+                aria-hidden="true"
+                style="color: #47525d !important;"
+              ></i>
+              {{ c }}
+            </div>
+          </div> -->
+
+         <!--  <div
+            *ngIf="
+              property && !loadingProperties && property.amenities.length > 0
+            "
+          >
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="desc-headline">Amenities</h3>
+            </div>
+            <div
+              class="col-md-6 col-sm-12 col-xs-12"
+              *ngFor="let c of property.amenities"
+            >
+              <i
+                class="fa fa-check-square-o"
+                aria-hidden="true"
+                style="color: #47525d !important;"
+              ></i>
+              {{ c }}
+            </div>
+          </div> -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <span *ngIf="property.videos.length > 0">
+              <span>
+                <iframe
+                  class="video"
+                  width="100%"
+                  height="100%"
+                  [src]="urlVideoSaneada"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </span>
+            </span>
+          </div>
+
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3 class="desc-headline" *ngIf="!loadingProperties">
+              Mapa de ubicación
+            </h3>
+            <div id="map" class="map margin-bottom-50"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Property Description / End -->
+
+       <!-- Sidebar -->
+       <div class="col-lg-4 col-md-5">
+        <div class="sidebar sticky right">
+          <div class="card">
+            <div class="card-body card-sidebar">
+              <!-- Widget -->
+              <div class="widget">
+                <h3 class="margin-bottom-30 margin-top-35">
+                  EXCELENTE OPORTUNIDAD
+                </h3>
+
+                <!-- Widget -->
+                <div class="widget margin-bottom-30 text-center">
+                  <div class="social-widget">
+                    <a
+                      target="_blank"
+                      href="https://api.whatsapp.com/send?phone={{property.whatsapp | limpiarTelCaptador }}&text=Buenos dias. Solicito información sobre la propiedad {{property.code}}"
+                      data-action="share/whatsapp/share"
+                      class="widget-button with-tip btn-whatsapp"
+                      data-tip-content="Print"
+                      ><i class="fa fa-whatsapp"></i>
+                    </a>
+                    <!-- <button
+                      class="widget-button with-tip btn-facebook"
+                      data-tip-content="Print"
+                    >
+                      <i class="fa fa-facebook"></i>
+                    </button>
+                    <button
+                      class="widget-button with-tip btn-twitter"
+                      data-tip-content="Print"
+                    >
+                      <i class="fa fa-twitter"></i>
+                    </button> -->
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+                <!-- Widget / End -->
+
+                <div class="col-12">
+                  <table class="basic-table">
+                    <tr>
+                      <td><b>Código:</b></td>
+                      <td>{{ property.code }}</td>
+                    </tr>
+
+                    <tr>
+                      <td><b>Operación:</b></td>
+                      <td>{{ property.operation }}</td>
+                    </tr>
+
+                    <tr>
+                      <td><b>Habitaciones:</b></td>
+                      <td>{{ _getValueCharByName("Habitaciones") }}</td>
+                    </tr>
+
+                    <tr>
+                      <td><b>Baños:</b></td>
+                      <td>{{ _getValueCharByName("Baños") }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Sup. terreno:</b></td>
+                      <td>{{ _getValueCharByName("Superficie total") }}mt<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                      <td><b>Sup. construida:</b></td>
+                      <td>{{ _getValueCharByName("Superficie útil") }}mt<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                      <td><b>Año construcción:</b></td>
+                      <td>{{ _getValueCharByName("Año de construcción") }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Widget / End -->
+
+          <div class="card">
+            <div class="card-body card-sidebar">
+              <!-- Widget -->
+              <div class="widget">
+                <!-- Agent Widget -->
+                <div class="agent-widget">
+                  <h4>Solicitar Visita</h4>
+                  <form [formGroup]="formEmailContact" (ngSubmit)="sendEmail()">
+                    <input
+                      type="text"
+                      placeholder="Ingrese su nombre"
+                      formControlName="nombre"
+                    />
+                    <span class="error-span">
+                      <div
+                        *ngFor="let validation of validation_messages.nombre"
+                      >
+                        <div
+                          class="error"
+                          *ngIf="
+                            formEmailContact
+                              .get('nombre')
+                              .hasError(validation.type) && submited
+                          "
+                        >
+                          {{ validation.message }}
+                        </div>
+                      </div>
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Ingrese su email"
+                      formControlName="email"
+                      pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
+                    />
+                    <span class="error-span">
+                      <div *ngFor="let validation of validation_messages.email">
+                        <div
+                          class="error"
+                          *ngIf="
+                            formEmailContact
+                              .get('email')
+                              .hasError(validation.type) && submited
+                          "
+                        >
+                          {{ validation.message }}
+                        </div>
+                      </div>
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Ingrese su teléfono"
+                      formControlName="telefono"
+                    />
+                    <span class="error-span">
+                      <div
+                        *ngFor="let validation of validation_messages.telefono"
+                      >
+                        <div
+                          class="error"
+                          *ngIf="
+                            formEmailContact
+                              .get('telefono')
+                              .hasError(validation.type) && submited
+                          "
+                        >
+                          {{ validation.message }}
+                        </div>
+                      </div>
+                    </span>
+                    <textarea formControlName="mensaje">
+                      Estoy interesado por la propiedad MOR-003 y necesitaría más detalles.
+                    </textarea>
+                    <span class="error-span">
+                      <div
+                        *ngFor="let validation of validation_messages.mensaje"
+                      >
+                        <div
+                          class="error"
+                          *ngIf="
+                            formEmailContact
+                              .get('mensaje')
+                              .hasError(validation.type) && submited
+                          "
+                        >
+                          {{ validation.message }}
+                        </div>
+                      </div>
+                    </span>
+                    <div
+                      *ngIf="status === 1"
+                      class="alert alert-success"
+                      role="alert"
+                    >
+                      {{ msj }}
+                    </div>
+
+                    <div
+                      *ngIf="status === 0"
+                      class="alert alert-danger"
+                      role="alert"
+                    >
+                      {{ msj }}
+                    </div>
+
+                    <button
+                      class="button fullwidth margin-top-5"
+                      type="submit"
+                      name="submit-form"
+                      [disabled]="cargandoEmail"
+                    >
+                      <strong style="color: #fff;" *ngIf="!cargandoEmail"
+                        ><i class="fa fa-envelope"></i> Enviar
+                      </strong>
+                      <strong style="color: #fff;" *ngIf="cargandoEmail"
+                        ><i class="fa fa-envelope"></i> Enviando mensaje...
+                      </strong>
+                    </button>
+                  </form>
+                </div>
+                <!-- Agent Widget / End -->
+              </div>
+              <!-- Widget / End -->
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body card-sidebar">
+              <p>Imprimir PDF con la información de la propiedad</p>
+              <button
+                *ngIf="!loadingProperties"
+                class="button fullwidth margin-top-0"
+                (click)="imprimirFicha()"
+              >
+                <i class="fa fa-download"></i>Imprimir Ficha
+              </button>
+            </div>
+          </div>
+
+          <!--<div class="card" *ngIf="urlVideoSaneada">
+                    <div class="card-body card-sidebar">
+                        <h4>{{property.titulo_video}}</h4>
+                        <p>{{property.descripcion_video}}</p>
+                        <iframe width="100%" height="100%" [src]="urlVideoSaneada" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>-->
+        </div>
+      </div>
+      <!-- Sidebar / End -->
+      
+    </div>
+  </div> 
+</div>
+
+<div id="content" style="display: none;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <img
+          alt="Bootstrap Image Preview"
+          style="padding: 10px;"
+          src="./assets/images/logo.png"
+        />
+        <span
+          class="badge badge-light"
+          style="
+            font-size: 15px !important;
+            float: right !important;
+            padding: 30px;
+            font-weight: 700;
+          "
+          >{{ property.code }}</span
+        >
+        <div class="page-header">
+          <h1>
+            {{ property.title }}
+            <br /><br />
+            <small>{{ property.propertyType }} en {{ property.operation }} </small>
+            <small style="float: right;"
+              >{{ property.clpValue }} - {{ property.ufValue }}</small
+            >
+          </h1>
+        </div>
+        <div class="text-center">
+          <img
+            alt="Bootstrap Image Preview"
+            style="width: 50%; padding: 10px;"
+            src="{{ property.mainImage }}"
+          />
+        </div>
+
+        <br />
+        <table class="table">
+          <tbody>
+            <tr>
+            <!--   <th>Mt2 Construidos: {{ property.sup_const }}</th>
+              <th>Habitaciones: {{ property.habitaciones }}</th>
+              <th>Baños: {{ property.banios }}</th>
+              <th>Estacionamientos: {{ property.garages }}</th> -->
+            </tr>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          style="color: #222222 !important;"
+          [innerHtml]="property.publicObservations | html: 'html'"
+        ></div>
+        <br />
+        <table
+          style="
+            border: 1px solid #1c6ea4;
+            background-color: #eeeeee;
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+            font-size: 13px;
+          "
+        >
+          <tbody>
+            <tr
+              *ngIf="
+                property &&
+                !loadingProperties &&
+                property.characteristics.length > 0
+              "
+            >
+              <td
+                style="
+                  width: 25%;
+                  border: 1px solid #aaaaaa;
+                  padding: 3px 2px;
+                  text-align: center;
+                "
+              >
+                Características
+              </td>
+              <td
+                style="width: 75%; border: 1px solid #aaaaaa; padding: 3px 2px;"
+              >
+                <span *ngFor="let c of property.characteristics">
+                  {{ c }},
+                </span>
+              </td>
+            </tr>
+           <!--  <tr
+              *ngIf="
+                property && !loadingProperties && property.amenities.length > 0
+              "
+            >
+              <td
+                style="
+                  width: 25%;
+                  border: 1px solid #aaaaaa;
+                  padding: 3px 2px;
+                  text-align: center;
+                "
+              >
+                Amenities
+              </td>
+              <td
+                style="width: 75%; border: 1px solid #aaaaaa; padding: 3px 2px;"
+              >
+                <span *ngFor="let c of property.amenities"> {{ c }}, </span>
+              </td>
+            </tr>
+            <tr
+              *ngIf="
+                property && !loadingProperties && property.playas.length > 0
+              "
+            >
+              <td
+                style="
+                  width: 25%;
+                  border: 1px solid #aaaaaa;
+                  padding: 3px 2px;
+                  text-align: center;
+                "
+              >
+                Playas
+              </td>
+              <td
+                style="width: 75%; border: 1px solid #aaaaaa; padding: 3px 2px;"
+              >
+                <span *ngFor="let c of property.playas"> {{ c }}, </span>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 

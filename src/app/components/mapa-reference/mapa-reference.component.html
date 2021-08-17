@@ -1,0 +1,26 @@
+<!-- Map Container -->
+<div class="contact-map">
+
+	<!-- Google Maps -->
+	<div class="google-map-container">
+        <div id="map" class="map margin-bottom-50"></div>
+	</div>
+	<!-- Google Maps / End -->
+
+	<!-- Office -->
+	<div class="address-box-container">
+		<div class="address-container" data-background-image="images/our-office.jpg">
+			<div class="office-address">
+		<h2><img src="./assets/images/logo-white.png" alt=""></h2><br/>
+        <h3>Seleccione un sitio</h3>
+        <select (change)="changeMap($event)" style="width: 80%; margin: 0 auto;">
+          <option *ngFor="let o of options" value="{{o.name}}">{{o.name}}</option>
+        </select>
+			</div>
+		</div>
+	</div>
+	<!-- Office / End -->
+
+</div>
+<div class="clearfix"></div>
+<!-- Map Container / End -->

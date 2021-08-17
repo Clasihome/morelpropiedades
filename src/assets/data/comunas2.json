@@ -1,0 +1,414 @@
+[
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua",
+    "condominio": ""
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - 12 Cachagua",
+    "condominio": "12 Cachagua"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Aguas Claras",
+    "condominio": "Aguas Claras"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Costa Cachagua",
+    "condominio": "Costa Cachagua"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Cantagua",
+    "condominio": "Cantagua"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Punta Cachagua",
+    "condominio": "Punta Cachagua"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Tortugas De Cachagua",
+    "condominio": "Tortugas De Cachagua"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - El Maitén",
+    "condominio": "El Maitén"
+  },
+  {
+    "sector_id": 40,
+    "leyenda": "Cachagua - Pinares De Cachagua",
+    "condominio": "Pinares De Cachagua"
+  },
+  {
+    "sector_id": 128,
+    "leyenda": "Catapilco",
+    "condominio": ""
+  },
+  {
+    "sector_id": 128,
+    "leyenda": "Catapilco - Aires de Catapilco",
+    "condominio": "Aires de Catapilco"
+  },
+  {
+    "sector_id": 128,
+    "leyenda": "Catapilco - La Foresta",
+    "condominio": "La Foresta"
+  },
+  {
+    "sector_id": 128,
+    "leyenda": "Catapilco - El Tebal",
+    "condominio": "El Tebal"
+  },
+  {
+    "sector_id": 128,
+    "leyenda": "Catapilco - Valle Oculto",
+    "condominio": "Valle Oculto"
+  },
+  {
+    "sector_id": 121,
+    "leyenda": "Costa Huaquén",
+    "condominio": ""
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón",
+    "condominio": ""
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón - Alto Mar",
+    "condominio": "Alto Mar"
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón - Costa Quilén",
+    "condominio": "Costa Quilén"
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón - Loteo Las Varas",
+    "condominio": "Loteo Las Varas"
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón - Playa Cau Cau",
+    "condominio": "Playa Cau Cau"
+  },
+  {
+    "sector_id": 46,
+    "leyenda": "Horcón - Bahía Pelicano",
+    "condominio": "Bahía Pelicano"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella",
+    "condominio": ""
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Condominio Marbella",
+    "condominio": "Marbella"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Costa Golf",
+    "condominio": "Costa Golf"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Cubica Marbella",
+    "condominio": "Cubica Marbella"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Flores De Marbella",
+    "condominio": "Flores De Marbella"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Jardines De Marbella",
+    "condominio": "Jardines De Marbella"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Olas De Marbella",
+    "condominio": "Olas De Marbella"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Parador Del Mar",
+    "condominio": "Parador Del Mar"
+  },
+  {
+    "sector_id": 54,
+    "leyenda": "Marbella - Solana De Marbella",
+    "condominio": "Solana De Marbella"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo",
+    "condominio": ""
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Alto Maitencillo",
+    "condominio": "Alto Maitencillo"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Alto Lomas",
+    "condominio": "Alto Lomas"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Boldo De Pangal",
+    "condominio": "Boldo De Pangal"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Boldo De Mollar",
+    "condominio": "Boldo De Mollar"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Campo Viejo",
+    "condominio": "Campo Viejo"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Cerro Tacna",
+    "condominio": "Cerro Tacna"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Costa Mai",
+    "condominio": "Costa Mai"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Entre Lomas",
+    "condominio": "Entre Lomas"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - El Claro",
+    "condominio": "El Claro"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Lomas Blancas",
+    "condominio": "Lomas Blancas"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Las Hermanas",
+    "condominio": "Las Hermanas"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Lomas De Mar",
+    "condominio": "Lomas De Mar"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Los Cóguiles",
+    "condominio": "Los Cóguiles"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - La Divisa",
+    "condominio": "La Divisa"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - La Hijuela",
+    "condominio": "La Hijuela"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Mallorca",
+    "condominio": "Mallorca"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Parque Maitencillo",
+    "condominio": "Parque Maitencillo"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Playa Agatas",
+    "condominio": "Playa Agatas"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Playa Blanca",
+    "condominio": "Playa Blanca"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Punta Surf",
+    "condominio": "Punta Surf"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Polo Maitencillo",
+    "condominio": "Polo Maitencillo"
+  },
+  {
+    "sector_id": 5,
+    "leyenda": "Maitencillo - Terramar",
+    "condominio": "Terramar"
+  },
+  {
+    "sector_id": 53,
+    "leyenda": "Mantagua",
+    "condominio": ""
+  },
+  {
+    "sector_id": 49,
+    "leyenda": "Los Molles",
+    "condominio": ""
+  },
+  {
+    "sector_id": 49,
+    "leyenda": "Los Molles - Rocas Del Mar",
+    "condominio": "Rocas Del Mar"
+  },
+  {
+    "sector_id": 56,
+    "leyenda": "Pichicuy",
+    "condominio": ""
+  },
+  {
+    "sector_id": 56,
+    "leyenda": "Pichicuy - Costa Huaquén",
+    "condominio": "Costa Huaquén"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo",
+    "condominio": ""
+  },
+
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - El Tomé",
+    "condominio": "El Tomé"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Costa Puyai ",
+    "condominio": "Costa Puyai"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Costa Puyai II",
+    "condominio": "Costa Puyai II"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Punta Puyai",
+    "condominio": "Punta Puyai"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Punta Puyai Arenas II",
+    "condominio": "Arenas II"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Laguna",
+    "condominio": "Laguna"
+  },
+
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Mirador Punta Pite",
+    "condominio": "Mirador Punta Pite"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Punta Colonos",
+    "condominio": "Punta Colonos"
+  },
+  {
+    "sector_id": 55,
+    "leyenda": "Papudo - Flores De Puyai",
+    "condominio": "Flores De Puyai"
+  },
+  {
+    "sector_id": 157,
+    "leyenda": "Pucalán",
+    "condominio": ""
+  },
+  {
+    "sector_id": 57,
+    "leyenda": "Puchuncaví",
+    "condominio": ""
+  },
+  {
+    "sector_id": 57,
+    "leyenda": "Puchuncaví - Los Troncos",
+    "condominio": "Los Troncos"
+  },
+  {
+    "sector_id": 59,
+    "leyenda": "Quintero - Ritoque",
+    "condominio": ""
+  },
+  {
+    "sector_id": 59,
+    "leyenda": "Quintero - Rocas De Ritoque",
+    "condominio": "Rocas De Ritoque"
+  },
+  {
+    "sector_id": 47,
+    "leyenda": "Quintero - Valle Alegre",
+    "condominio": ""
+  },
+  {
+    "sector_id": 60,
+    "leyenda": "Temuco",
+    "condominio": ""
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar",
+    "condominio": ""
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - Alta Vista",
+    "condominio": "Alta Vista"
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - El Boldo",
+    "condominio": "El Boldo"
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - Laguna de Zapallar",
+    "condominio": "Laguna de Zapallar"
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - Santa Bertina",
+    "condominio": "Santa Bertina"
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - Fundo Zapallar",
+    "condominio": "Fundo Zapallar"
+  },
+  {
+    "sector_id": 69,
+    "leyenda": "Zapallar - Zapallar Norte",
+    "condominio": "Zapallar Norte"
+  }
+]

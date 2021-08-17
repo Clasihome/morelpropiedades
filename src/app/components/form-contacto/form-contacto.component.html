@@ -1,0 +1,196 @@
+<form
+  method="post"
+  action="contact.php"
+  name="contactform"
+  id="contactform"
+  autocomplete="on"
+  [formGroup]="formEmailContact"
+  (ngSubmit)="sendEmail()"
+>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <input
+          formControlName="nombre"
+          type="text"
+          id="name"
+          placeholder="Nombre Completo"
+          required="required"
+        />
+        <span class="error-span">
+          <div *ngFor="let validation of validation_messages.nombre">
+            <div
+              class="error"
+              *ngIf="
+                formEmailContact.get('nombre').hasError(validation.type) &&
+                submited
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          placeholder="Email"
+          pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
+          required="required"
+        />
+        <span class="error-span">
+          <div *ngFor="let validation of validation_messages.email">
+            <div
+              class="error"
+              *ngIf="
+                formEmailContact.get('email').hasError(validation.type) &&
+                submited
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <input
+          formControlName="telefono"
+          type="text"
+          id="name"
+          placeholder="Teléfono"
+          required="required"
+        />
+        <span class="error-span">
+          <div *ngFor="let validation of validation_messages.telefono">
+            <div
+              class="error"
+              *ngIf="
+                formEmailContact.get('telefono').hasError(validation.type) &&
+                submited
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <input
+          formControlName="asunto"
+          type="text"
+          id="subject"
+          placeholder="Asunto"
+          required="required"
+        />
+        <span class="error-span">
+          <div *ngFor="let validation of validation_messages.asunto">
+            <div
+              class="error"
+              *ngIf="
+                formEmailContact.get('asunto').hasError(validation.type) &&
+                submited
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkboxes in-row margin-bottom-20">
+    <input id="check-2" type="checkbox" (click)="checkValueBusco()" />
+    <label for="check-2">Busco una propiedad</label>
+
+    <input
+      id="check-3"
+      type="checkbox"
+      name="check"
+      (click)="checkValueEntrego()"
+    />
+    <label for="check-3">Entrego una propiedad</label>
+  </div>
+  <!-- <hr />
+<p>En caso de arriendo (*)</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <h5>Fecha Ingreso (*)</h5>
+        <input
+          name="fecha_ingreso"
+          type="date"
+          formControlName="fecha_ingreso"
+          (change)="setFechaIngreso($event)"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <h5>Fecha Salida (*)</h5>
+        <input name="fecha_salida" type="date" formControlName="fecha_salida" />
+      </div>
+    </div>
+  </div>
+-->
+  <div>
+    <textarea
+      formControlName="mensaje"
+      cols="40"
+      rows="3"
+      id="comments"
+      placeholder="Mensaje"
+      spellcheck="true"
+      required="required"
+    ></textarea>
+    <span class="error-span">
+      <div *ngFor="let validation of validation_messages.mensaje">
+        <div
+          class="error"
+          *ngIf="
+            formEmailContact.get('mensaje').hasError(validation.type) &&
+            submited
+          "
+        >
+          {{ validation.message }}
+        </div>
+      </div>
+    </span>
+  </div>
+
+  <div *ngIf="status === 1" class="alert alert-success" role="alert">
+    {{ msj }}
+  </div>
+
+  <div *ngIf="status === 0" class="alert alert-danger" role="alert">
+    {{ msj }}
+  </div>
+
+  <button
+    class="button fullwidth margin-top-5"
+    type="submit"
+    name="submit-form"
+    [disabled]="cargandoEmail"
+  >
+    <strong style="color: #fff;" *ngIf="!cargandoEmail"
+      ><i class="fa fa-envelope"></i> Enviar
+    </strong>
+    <strong style="color: #fff;" *ngIf="cargandoEmail"
+      ><i class="fa fa-envelope"></i> Enviando mensaje...
+    </strong>
+  </button>
+</form>
