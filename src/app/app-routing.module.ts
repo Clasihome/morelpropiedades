@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   {
     path:
-      "properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:solo_condominio/:proyecto/:order_by/:order/:page",
+      "properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:solo_condominio/:proyecto/:code/:order_by/:order/:page",
     component: PropertiesComponent,
   },
   { path: "property-detail/:id", component: PropertiesDetailsComponent },

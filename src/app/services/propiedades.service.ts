@@ -28,14 +28,14 @@ export class PropiedadesService {
     return this.http.get<Comunas>('assets/data/comunas2.json');
   }
 
-  getPropiedadesByFilter(idcomune?,type?, estado?, preMin?, preMax?, supMin?, supMax?, sector?, condominium?, condominiumName?, proyecto?, pagina?, code?) {
+  getPropiedadesByFilter(idcomune?,type?, estado?, preMin?, preMax?, supMin?, supMax?, sector?, condominium?, condominiumName?, proyecto?, pagina?, code?, order?) {
     if (pagina === undefined) {
       pagina = 0;
     }
 
-    console.log(sector, condominium, condominiumName)
- 
-    type = this.validateQuery(idcomune, '&comunne=');
+    console.log(idcomune, sector, condominium, condominiumName)
+
+    idcomune = this.validateQuery(idcomune, '&comunne=');
     type = this.validateQuery(type, '&propertyType=');
     estado = this.validateQuery(estado, '&operation=');
     preMin = this.validateQuery(preMin, '&priceMin=');
@@ -47,10 +47,10 @@ export class PropiedadesService {
     condominiumName = this.validateQuery(condominiumName, '&condominiumName=');
     proyecto = this.validateQuery(proyecto, '&proyecto=');
     code = this.validateQuery(code, '&stringSearch=');
+    order = this.validateQuery(order, '&sortOrder=');
  
-    console.log(condominium, condominiumName)
     // tslint:disable-next-line: max-line-length
-    return this.http.get<RespPropiedades>(`${this.URL}${idcomune}${type}${estado}&page=${pagina}${preMin}${preMax}${supMin}${supMax}${sector}${condominium}${condominiumName}${proyecto}${code}&currency=CLP&limit=8`);
+    return this.http.get<RespPropiedades>(`${this.URL}${idcomune}${type}${estado}&page=${pagina}${preMin}${preMax}${supMin}${supMax}${sector}${condominium}${condominiumName}${proyecto}${code}${order}&sortBy=uf&currency=UF&limit=8`);
   }
 
   getPropiedadesDetail(id: string) {
@@ -70,7 +70,7 @@ export class PropiedadesService {
   }
 
   validateQuery(value, query) {
-    if (value === '' || value === 'all' || value === 'null' || value === 'todas' || typeof value === 'undefined') {
+    if (value === '' || value === 'all' || value === 'null' || value === 'todas' || typeof value === 'undefined' || value === 'undefined') {
       return '';
     } else {
       return `${query}${value}`;

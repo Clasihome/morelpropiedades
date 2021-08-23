@@ -17,6 +17,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   idComune = 'todas';
   sectorId = 'todas';
   condominio = '';
+  code = '';
   order = 'desc';
   order_by = 'precio';
 
@@ -73,10 +74,11 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
   changeOrder(event) {
     this.order = event.target.value;
-    this.getPage(1);
+    this.getPage(0);
   }
 
   getPropiedadByUrl() {
+    
     //"properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:solo_condominio/:order_by/:order/:page",
     this._activateRoute.params.subscribe((params) => {
    
@@ -95,7 +97,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         proyecto,
         order_by, 
         order,
-        page
+        page, 
+        code
       } = params;
 
       this.idComune = idcomune;
@@ -109,13 +112,15 @@ export class PropertiesComponent implements OnInit, OnDestroy {
       this.soloCondominio = solo_condominio;
       this.proyecto = proyecto;
      
-      this.order = order;
+      this.code = code;
+
+      this.order = order.toString().toLowerCase();
       this.order_by = order_by;
       this.currentPage = page;
+      this.properties = [];
 
-      console.log(params)
       this._propiedadesServices
-      .getPropiedadesByFilter(this.idComune, this.type, this.status, this.pre_min, this.pre_max, this.sup_min, '9999999999', this.sectorId, this.soloCondominio, this.condominio, this.proyecto, this.currentPage)
+      .getPropiedadesByFilter(this.idComune, this.type, this.status, this.pre_min, this.pre_max, this.sup_min, '9999999999', this.sectorId, this.soloCondominio, this.condominio, this.proyecto, this.currentPage, this.code, this.order)
       .subscribe(async resp => {
         this.currentPage = resp.page;
         this.lastPage = Math.trunc(resp.totalRegistersQuery / resp.perPage);
@@ -131,7 +136,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
   getPage(page) {
     this._router.navigate([
-      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.soloCondominio}/${this.proyecto}/${this.order_by}/${this.order}/${page}`,
+      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.soloCondominio}/${this.proyecto}/${this.code}/${this.order_by}/${this.order}/${page}`,
     ]);
   }
 

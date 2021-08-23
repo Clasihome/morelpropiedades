@@ -127,13 +127,12 @@
               >
                 <div class="main-search-input">
                   <input
-                    type="number"
                     name="code"
                     [(ngModel)]="code"
-                    placeholder="Ingrese el número de la propiedad"
+                    placeholder="Ingrese el número de la propiedad o cualquier descripción"
                   />
                   <!-- <input type="text" placeholder="Ingrese una comuna" value=""/>-->
-                  <button class="button" (click)="searchPropertiesByCodigo()">
+                  <button class="button" (click)="searchProperties()">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
@@ -178,7 +177,7 @@
         <a
           href="{{
             LINK
-          }}properties/all/all/all/null/null/null/null/null/null/null/precio/DESC/0"
+          }}properties/all/all/all/null/null/null/null/null/null/null/null/precio/DESC/0"
           class="button medium button-grey"
         >
           Ver Todas Las Propiedades</a

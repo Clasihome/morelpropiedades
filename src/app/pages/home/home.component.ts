@@ -76,9 +76,13 @@ export class HomeComponent implements OnInit {
       this.condominios_check = null;
     }
 
+    if (this.code === '') {
+      this.code = null;
+    }
+
     this.router.navigate([
       // tslint:disable-next-line:max-line-length
-      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.condominios_check}/null/precio/DESC/0`,
+      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.condominios_check}/null/${this.code}/precio/DESC/0`,
     ]);
   }
 
