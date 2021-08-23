@@ -8,6 +8,7 @@ import { Property } from '../../interfaces/interfaces';
 })
 export class CardPropiedadComponent implements OnInit {
   @Input() p: Property;
+  @Input() fullWidth: Boolean;
   ufValue: number;
   chars: any = { supTotal: '0', supUtil: '0', banios: '0', habitaciones: '0' };
 
@@ -23,7 +24,7 @@ export class CardPropiedadComponent implements OnInit {
   }
 
   getCurrencySecondary() {
-    if (this.p.currency === 'UF') {
+    if (this.p && this.p.currency === 'UF') {
       return 'CLP';
     } else {
       return 'UF';

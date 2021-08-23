@@ -68,17 +68,17 @@ export class HomeComponent implements OnInit {
       this.sectorId = null;
     }
 
-    if (this.condominios_check) {
-      this.condominio = 'todos';
-    } else {
-      if (this.condominio === '') {
-        this.condominio = null;
-      }
+    if (this.condominio === '') {
+      this.condominio = null;
+    }
+    
+    if (!this.condominios_check) {
+      this.condominios_check = null;
     }
 
     this.router.navigate([
       // tslint:disable-next-line:max-line-length
-      `/properties/todas/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.habitaciones}/${this.banios}/${this.sup_min}/precio/DESC/1`,
+      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.condominios_check}/null/precio/DESC/0`,
     ]);
   }
 
@@ -87,11 +87,13 @@ export class HomeComponent implements OnInit {
   }
 
   selectEvent(item) {
-    this.condominio = item.condominio;
-    this.sectorId = item.sector_id;
+    console.log(item)
+    this.idComune = item.leyenda.split(" - ")[0];
+    this.sectorId = item.leyenda.split(" - ")[1];
   }
 
   changeStatus(event) {
+    console.log(event.target.value)
     this.status = event.target.value;
   }
 

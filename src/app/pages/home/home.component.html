@@ -16,20 +16,20 @@
           <div class="row with-forms">
             <div class="adv-search-btn" style="text-align: right;">
               <a
-                *ngIf="search_visible !== 'advance_search'"
-                (click)="search_visible = 'advance_search'"
+                *ngIf="searchVisible !== 'advance_search'"
+                (click)="searchVisible = 'advance_search'"
                 style="cursor: pointer;"
                 >Busqueda avanzada</a
               >
               <a
-                *ngIf="search_visible !== 'search_code'"
-                (click)="search_visible = 'search_code'"
+                *ngIf="searchVisible !== 'search_code'"
+                (click)="searchVisible = 'search_code'"
                 style="cursor: pointer;"
                 >Código</a
               >
               &nbsp;
               <span
-                *ngIf="search_visible === 'advance_search'"
+                *ngIf="searchVisible === 'advance_search'"
                 style="display: inline; position: relative;"
                 class="checkboxes in-row margin-bottom-20"
                 style="padding-left: 10px;"
@@ -45,18 +45,19 @@
             </div>
             <br />
             <!-- Property Type -->
-            <div *ngIf="search_visible === 'search'">
+            
+            <div *ngIf="searchVisible === 'advance_search'">
               <div class="col-md-3 input-inline">
                 <select
                   data-placeholder="Any Type"
-                  (change)="changeType($event)"
+                  [(ngModel)]="type"
                   class="chosen-select-no-single"
                 >
                   <option value="todas" selected>Tipo de propiedad</option>
-                  <option value="1">Casa</option>
-                  <option value="2">Departamento</option>
-                  <option value="4">Terreno</option>
-                  <option value="5">Local</option>
+                  <option value="CASA">Casa</option>
+                  <option value="DEPARTAMENTO">Departamento</option>
+                  <option value="SITIO">Terreno</option>
+                  <option value="LOCAL">Local</option>
                 </select>
               </div>
 
@@ -64,61 +65,12 @@
               <div class="col-md-4 input-inline">
                 <select
                   data-placeholder="Any Status"
-                  (change)="changeStatus($event)"
+                  [(ngModel)]="status"
                   class="chosen-select-no-single"
                 >
                   <option value="todas">Estado</option>
-                  <option value="0">Venta</option>
-                  <option value="1">Arriendo</option>
-                </select>
-              </div>
-
-              <!-- Main Search Input -->
-              <div class="col-md-5 input-inline">
-                <div class="main-search-input">
-                  <ng-select
-                    [items]="dataComunas$ | async"
-                    bindLabel="leyenda"
-                    bindValue="id"
-                    [(ngModel)]="selectedItems"
-                    placeholder="Ingrese sector o condominio"
-                    (change)="selectEvent($event)"
-                    notFoundText="No se encontraron coincidencias"
-                    [(ngModel)]="comunaSelected"
-                  >
-                  </ng-select>
-                  <!-- <input type="text" placeholder="Ingrese una comuna" value=""/>-->
-                  <button class="button" (click)="searchProperties()">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="search_visible === 'advance_search'">
-              <div class="col-md-3 input-inline">
-                <select
-                  data-placeholder="Any Type"
-                  (change)="changeType($event)"
-                  class="chosen-select-no-single"
-                >
-                  <option value="todas" selected>Tipo de propiedad</option>
-                  <option value="1">Casa</option>
-                  <option value="2">Departamento</option>
-                  <option value="4">Terreno</option>
-                  <option value="5">Local</option>
-                </select>
-              </div>
-
-              <!-- Status -->
-              <div class="col-md-4 input-inline">
-                <select
-                  data-placeholder="Any Status"
-                  (change)="changeStatus($event)"
-                  class="chosen-select-no-single"
-                >
-                  <option value="todas">Estado</option>
-                  <option value="0">Venta</option>
-                  <option value="1">Arriendo</option>
+                  <option value="VENTA">Venta</option>
+                  <option value="ARRIENDO">Arriendo</option>
                 </select>
               </div>
 
@@ -144,7 +96,7 @@
                 <div class="main-search-input">
                   <select (change)="changeCurrency($event)">
                     <option value="UF">UF</option>
-                    <option value="$">Pesos</option>
+                    <option value="CLP">Pesos</option>
                   </select>
                 </div>
               </div>
@@ -168,7 +120,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="search_visible === 'search_code'">
+            <div *ngIf="searchVisible === 'search_code'">
               <div
                 class="col-md-6 input-inline"
                 style="width: 100% !important;"
@@ -214,7 +166,7 @@
         *ngFor="let fp of featuredProperties"
       >
         <div class="listing-item">
-          <app-card-propiedad [p]="fp"></app-card-propiedad>
+          <app-card-propiedad [p]="fp" [fullWidth]="false"></app-card-propiedad>
         </div>
       </div>
       <!-- Listing Item / End -->
@@ -226,7 +178,7 @@
         <a
           href="{{
             LINK
-          }}properties/todas/todas/todas/null/null/UF/null/null/null/null/null/precio/DESC/1"
+          }}properties/all/all/all/null/null/null/null/null/null/null/precio/DESC/0"
           class="button medium button-grey"
         >
           Ver Todas Las Propiedades</a

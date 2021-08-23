@@ -37,7 +37,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Propiedades</a></li>
                 <li>
-                  <b>{{ property.propertyType }} en {{ property.ubication.comunne }}</b>
+                  <b>{{ property.propertyType }} en {{ property.ubication.commune }}</b>
                 </li>
               </ul>
             </nav>
@@ -121,14 +121,13 @@
             </div>
           </div>
 
-          <!-- Description -->
           <h3 class="desc-headline" *ngIf="!loadingProperties">Descripción</h3>
           <div
-            style="color: #222222 !important;"
+            style="color: #222222 !important; white-space:pre-line;"
             [innerHtml]="property.publicObservations | html: 'html'"
             *ngIf="!loadingProperties"
           ></div>
-          <!-- <div
+          <div
             *ngIf="
               property &&
               !loadingProperties &&
@@ -147,9 +146,9 @@
                 aria-hidden="true"
                 style="color: #47525d !important;"
               ></i>
-              {{ c }}
+               {{ c.name }}{{c.value.toString() === 'true' ? "" : c.value.toString() === 'false' ? "" : ": " + c.value}} 
             </div>
-          </div> -->
+          </div>
 
        <!--    <div
             *ngIf="property && !loadingProperties && property.playas.length > 0"
@@ -206,7 +205,7 @@
             </span>
           </div>
 
-          <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12" >
             <h3 class="desc-headline" *ngIf="!loadingProperties">
               Mapa de ubicación
             </h3>
@@ -217,7 +216,7 @@
       <!-- Property Description / End -->
 
        <!-- Sidebar -->
-       <div class="col-lg-4 col-md-5">
+       <div class="col-lg-4 col-md-5 col-sm-12">
         <div class="sidebar sticky right">
           <div class="card">
             <div class="card-body card-sidebar">
@@ -300,7 +299,7 @@
               <!-- Widget -->
               <div class="widget">
                 <!-- Agent Widget -->
-                <div class="agent-widget">
+                <div class="agent-widget" style="box-shadow: none;">
                   <h4>Solicitar Visita</h4>
                   <form [formGroup]="formEmailContact" (ngSubmit)="sendEmail()">
                     <input
@@ -450,7 +449,7 @@
 </div>
 
 <div id="content" style="display: none;">
-  <div class="container-fluid">
+  <div class="container" style="margin: 20px">
     <div class="row">
       <div class="col-md-12">
         <img
@@ -473,12 +472,13 @@
             {{ property.title }}
             <br /><br />
             <small>{{ property.propertyType }} en {{ property.operation }} </small>
-            <small style="float: right;"
-              >{{ property.clpValue }} - {{ property.ufValue }}</small
+            <small style="float: right;">
+              {{ property.value | formatCurrency: property.currency }} 
+              <i *ngIf="ufValue !== 0">{{ getValueSecondary() | formatCurrency: getCurrencySecondary() }}</i></small
             >
           </h1>
         </div>
-        <div class="text-center">
+        <div style="width: 100%; text-align: center;">
           <img
             alt="Bootstrap Image Preview"
             style="width: 50%; padding: 10px;"
@@ -504,7 +504,7 @@
           </tbody>
         </table>
         <div
-          style="color: #222222 !important;"
+          style="color: #222222 !important;white-space:pre-line;"
           [innerHtml]="property.publicObservations | html: 'html'"
         ></div>
         <br />
@@ -526,7 +526,24 @@
                 property.characteristics.length > 0
               "
             >
-              <td
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="desc-headline">Características</h3>
+            </div>
+
+           
+            <div
+              class="col-md-4 col-sm-6 col-xs-6"
+              *ngFor="let c of property.characteristics"
+            >
+              <i
+                class="fa fa-check"
+                aria-hidden="true"
+                style="color: #47525d !important;"
+              ></i>
+               {{ c.name }}{{c.value.toString() === 'true' ? "" : c.value.toString() === 'false' ? "" : ": " + c.value}} 
+            </div>
+              <!-- <td
                 style="
                   width: 25%;
                   border: 1px solid #aaaaaa;
@@ -542,7 +559,7 @@
                 <span *ngFor="let c of property.characteristics">
                   {{ c }},
                 </span>
-              </td>
+              </td> -->
             </tr>
            <!--  <tr
               *ngIf="

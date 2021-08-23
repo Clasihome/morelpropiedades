@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   {
     path:
-      "properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:habitaciones/:banios/:sup_min/:order_by/:order/:page",
+      "properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:solo_condominio/:proyecto/:order_by/:order/:page",
     component: PropertiesComponent,
   },
   { path: "property-detail/:id", component: PropertiesDetailsComponent },
@@ -33,7 +33,7 @@ const routes: Routes = [
     path: "entreganos-tu-propiedad",
     component: EntreganosTuPropiedadComponent,
   },
-  { path: "proyectos", component: ProyectosComponent },
+  { path: "proyectos/:page", component: ProyectosComponent },
   { path: "not-found", component: NotFoundComponent },
   { path: "**", redirectTo: "/home", pathMatch: "full" },
 ];

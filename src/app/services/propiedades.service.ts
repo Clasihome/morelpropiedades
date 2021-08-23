@@ -25,31 +25,43 @@ export class PropiedadesService {
   }
 
   getComunasByJson() {
-    return this.http.get<Comunas>('assets/data/CITIES.json');
+    return this.http.get<Comunas>('assets/data/comunas2.json');
   }
 
-  getPropiedadesByFilter(idcomuna?, type?, estado?, preMin?, preMax?, supMin?, supMax?, pagina?, code?) {
+  getPropiedadesByFilter(idcomune?,type?, estado?, preMin?, preMax?, supMin?, supMax?, sector?, condominium?, condominiumName?, proyecto?, pagina?, code?) {
     if (pagina === undefined) {
       pagina = 0;
     }
 
-    idcomuna = this.validateTodas(idcomuna);
-    type = this.validateTodas(type);
-    estado = this.validateTodas(estado);
-    preMin = this.validateValueNumberMin(preMin);
-    preMax = this.validateValueNumberMax(preMax);
-    supMin = this.validateValueNumberMin(supMin);
-    supMax = this.validateValueNumberMax(supMax);
-    code = this.validateTodas(code);
+    console.log(sector, condominium, condominiumName)
+ 
+    type = this.validateQuery(idcomune, '&comunne=');
+    type = this.validateQuery(type, '&propertyType=');
+    estado = this.validateQuery(estado, '&operation=');
+    preMin = this.validateQuery(preMin, '&priceMin=');
+    preMax = this.validateQuery(preMax, '&priceMax=');
+    supMin = this.validateQuery(supMin, '&totalAreaFrom=');
+    supMax = this.validateQuery(supMax, '&totalAreaTo=');
+    sector = this.validateQuery(sector, '&sector=');
+    condominium = this.validateQuery(condominium, '&condominium=');
+    condominiumName = this.validateQuery(condominiumName, '&condominiumName=');
+    proyecto = this.validateQuery(proyecto, '&proyecto=');
+    code = this.validateQuery(code, '&stringSearch=');
+ 
+    console.log(condominium, condominiumName)
     // tslint:disable-next-line: max-line-length
-    return this.http.get<RespPropiedades>(`${this.URL}&propertyType=${type}&commune=${idcomuna}&operation=${estado}&page=${pagina}&priceMin=${preMin}&priceMax=${preMax}&totalAreaFrom=${supMin}&totalAreaTo=${supMax}&stringSearch=${code}&currency=CLP&limit=8`);
+    return this.http.get<RespPropiedades>(`${this.URL}${idcomune}${type}${estado}&page=${pagina}${preMin}${preMax}${supMin}${supMax}${sector}${condominium}${condominiumName}${proyecto}${code}&currency=CLP&limit=8`);
   }
 
   getPropiedadesDetail(id: string) {
     return this.http.get<Property>(`${this.URL}&propertyId=${id}`);
   }
 
-  getProyectos() {
+  getProyectos(pagina) {
+    if (pagina === undefined) {
+      pagina = 0;
+    }
+    return this.http.get<RespPropiedades>(`${this.URL}&page=${pagina}&proyecto=true&limit=8`);
   }
 
   getFeatured(cantidad?: number) {
@@ -57,11 +69,11 @@ export class PropiedadesService {
     return this.http.get<RespPropiedades>(`${this.URL}/propiedades/destacadas/${this.apiKey}&perpage=${this.cUltimasPropiedades}`);
   }
 
-  validateTodas(value) {
-    if (value === '' || value === 'all') {
+  validateQuery(value, query) {
+    if (value === '' || value === 'all' || value === 'null' || value === 'todas' || typeof value === 'undefined') {
       return '';
     } else {
-      return value;
+      return `${query}${value}`;
     }
   }
 
@@ -69,19 +81,4 @@ export class PropiedadesService {
     return this.http.get<RespuestaAgentes>(`${this.URL}/agentes/${this.apiKey}`);
   }
 
-  validateValueNumberMin(value) {
-    if (!value) {
-      return 1;
-    } else {
-      return value;
-    }
-  }
-
-  validateValueNumberMax(value) {
-    if (!value) {
-      return 999999999999;
-    } else {
-      return value;
-    }
-  }
 }

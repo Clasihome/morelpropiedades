@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PropiedadesService } from 'src/app/services/propiedades.service';
 import { SearchService } from 'src/app/services/search.service';
-import { RespPropiedades, Propiedad } from 'src/app/interfaces/interfaces';
+import { RespPropiedades, Propiedad, Property } from 'src/app/interfaces/interfaces';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./properties.component.sass'],
 })
 export class PropertiesComponent implements OnInit, OnDestroy {
-  properties: Propiedad[] = [];
+  properties: Property[] = [];
   status = 'todas';
   type = 'todas';
   idComune = 'todas';
@@ -28,13 +28,15 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   habitaciones = '';
   banios = '';
   sup_min = '';
+  soloCondominio = '';
+  proyecto = '';
 
   lastPage;
   previousPage;
   currentPage;
   loadingProperties = false;
   nextPage;
-  results: string;
+  results: number;
 
   constructor(
     private _propiedadesServices: PropiedadesService,
@@ -75,77 +77,61 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   }
 
   getPropiedadByUrl() {
-   /*  this._activateRoute.params.subscribe((params) => {
-      this.spinner.show();
+    //"properties/:idcomune/:type/:status/:sectorId/:condominio/:currency/:pre_min/:pre_max/:solo_condominio/:order_by/:order/:page",
+    this._activateRoute.params.subscribe((params) => {
+   
       this.loadingProperties = true;
-      if (params.idcomuna === 'todas') {
-        this.idComune = 'todas';
-      } else {
-        this.idComune = params.idcomune;
-      }
-      this.type = params.type;
-      this.status = params.status;
-      this.sectorId = params.sectorId;
-      this.condominio = params.condominio;
+      
+      const {
+        idcomune, 
+        type, 
+        status, 
+        sectorId, 
+        condominio, 
+        currency, 
+        pre_min, 
+        pre_max, 
+        solo_condominio, 
+        proyecto,
+        order_by, 
+        order,
+        page
+      } = params;
 
-      this.currency = params.currency;
-      this.pre_min = params.pre_min;
-      this.pre_max = params.pre_max;
-      this.currency = params.currency;
-      this.habitaciones = params.habitaciones;
-      this.banios = params.banios;
-      this.sup_min = params.sup_min;
-      this.order = params.order;
+      this.idComune = idcomune;
+      this.type = type;
+      this.status = status;
+      this.sectorId = sectorId;
+      this.condominio = condominio;
+      this.currency = currency;
+      this.pre_min = pre_min;
+      this.pre_max = pre_max;
+      this.soloCondominio = solo_condominio;
+      this.proyecto = proyecto;
+     
+      this.order = order;
+      this.order_by = order_by;
+      this.currentPage = page;
 
+      console.log(params)
       this._propiedadesServices
-        .getPropiedadesByFilter(
-          this.idComune,
-          this.type,
-          this.status,
-          this.currency,
-          this.pre_min,
-          this.pre_max,
-          this.sup_min,
-          null,
-          this.habitaciones,
-          this.banios,
-          this.sectorId,
-          this.condominio,
-          'precio',
-          this.order,
-          params.page
-        )
-        .subscribe((data) => {
-          this.properties = data['propiedades'];
-
-          if (data.pagination.currentpage - 1 <= 0) {
-            this.previousPage = 1;
-          } else {
-            this.previousPage = data.pagination.currentpage - 1;
-          }
-
-          this.currentPage = data.pagination.currentpage;
-          if (data.results === 1) {
-            this.results = `1 propiedad encontrada`;
-          } else {
-            this.results = `${data.results} propiedades encontradas`;
-          }
-
-          if (this.currentPage + 1 > data.pagination.lastpage) {
-            this.nextPage = data.pagination.lastpage;
-          } else {
-            this.nextPage = this.currentPage + 1;
-          }
-          this.lastPage = data.pagination.lastpage;
-          this.spinner.hide();
-          this.loadingProperties = false;
-        });
-    }); */
+      .getPropiedadesByFilter(this.idComune, this.type, this.status, this.pre_min, this.pre_max, this.sup_min, '9999999999', this.sectorId, this.soloCondominio, this.condominio, this.proyecto, this.currentPage)
+      .subscribe(async resp => {
+        this.currentPage = resp.page;
+        this.lastPage = Math.trunc(resp.totalRegistersQuery / resp.perPage);
+        this.results = resp.totalRegistersQuery;
+        this.previousPage = this.currentPage == "0" ? 0 : parseInt(this.currentPage) - 1;
+        this.nextPage = resp.hasMore >  0 ? parseInt(this.currentPage) + 1 : parseInt(this.currentPage);
+        this.properties = resp.properties;
+        
+        this.loadingProperties = false;
+      });
+    });
   }
 
   getPage(page) {
     this._router.navigate([
-      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.habitaciones}/${this.banios}/${this.sup_min}/${this.order_by}/${this.order}/${page}`,
+      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.soloCondominio}/${this.proyecto}/${this.order_by}/${this.order}/${page}`,
     ]);
   }
 

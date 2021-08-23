@@ -52,7 +52,7 @@
         <!-- Listing Item -->
         <div class="listing-item animated fadeIn slow">
           <a
-            [routerLink]="['/property-detail', p.id]"
+            [routerLink]="['/property-detail', p._id]"
             class="listing-img-container"
           >
             <div class="listing-badges">
@@ -60,12 +60,12 @@
             </div>
 
             <div class="listing-img-content">
-              <span class="listing-price">Desde {{ p.uf }}</span>
+              <span class="listing-price">Desde {{ p.value | formatCurrency: 'UF' }}</span>
             </div>
 
             <div class="listing-carousel">
               <div>
-                <img src="{{ p.img_destacada }}" alt="" />
+                <img src="{{ p.mainImage }}" alt="" />
               </div>
             </div>
           </a>
@@ -74,18 +74,18 @@
             <div class="listing-title">
               <h4 style="margin-bottom: 0px !important">
                 <a>
-                  {{ p.titulo }}
+                  {{ p.title }}
                   <span
                     style="font-weight: 400; text-transform: uppercase"
                     *ngIf="p.condominio"
                   >
-                    | {{ p.condominio }}</span
+                    | <!-- {{ p.condominio }} --></span
                   >
                 </a>
               </h4>
               <p style="margin: 0px 0px 20px 0px !important; font-size: 12px">
                 <i class="fa fa-map-marker"></i>
-                {{ p.sector }}
+                <!-- {{ p.sector }} -->
               </p>
 
               <a
@@ -98,9 +98,9 @@
               <div
                 style="color: #ffffff !important"
                 [innerHtml]="
-                  p.descripcion.length > 240
-                    ? (p.descripcion | slice: 0:240) + '...'
-                    : (p.descripcion | html: 'html')
+                  p.publicObservations.length > 240
+                    ? (p.publicObservations | slice: 0:240) + '...'
+                    : (p.publicObservations | html: 'html')
                 "
               ></div>
             </div>
@@ -120,6 +120,23 @@
       <!-- Listings Container / End -->
 
       <div class="clearfix"></div>
+       <!-- Pagination -->
+       <div class="pagination-container margin-top-20">
+        <nav class="pagination" style="text-align: center; margin: 10px 0px 30px 0px;">
+          <ul>
+            <li>
+              <a (click)="getPage(previousPage)" class="prev">Anterior</a>
+            </li>
+            <li>
+              <a class="detalle-pagination current-page"
+                >Página {{ currentPage }} de {{ lastPage }}</a
+              >
+            </li>
+            <li><a (click)="getPage(nextPage)" class="next">Siguiente</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Pagination / End -->
     </div>
   </div>
 </div>

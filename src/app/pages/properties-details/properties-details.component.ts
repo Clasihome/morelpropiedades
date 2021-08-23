@@ -22,6 +22,7 @@ export class PropertiesDetailsComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = [];
   urlVideoSaneada: SafeResourceUrl;
+  ufValue: number;
 
   submited = false;
   status = 2;
@@ -29,8 +30,14 @@ export class PropertiesDetailsComponent implements OnInit {
   msj = '';
   cargandoEmail: boolean;
 
-  lat: string;
-  lng: string;
+  coords = [];
+  mapboxConfig = {
+    width: 100,
+    height: 100,
+    context: null, 
+    data: null
+  };
+
   isDataAvailable: boolean = false;
 
   validation_messages = {
@@ -72,6 +79,7 @@ export class PropertiesDetailsComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private spinner: NgxSpinnerService
   ) {
+    this.ufValue = parseFloat(localStorage.getItem('uf'));
     this._activatedRoute.params.subscribe(async (param) => {
       await this.searchPropertyDetail(param.id);
     });
@@ -122,7 +130,7 @@ export class PropertiesDetailsComponent implements OnInit {
               );
             }
 
-            this.cargarMapa(this.property.ubication.location.latitude, this.property.ubication.location.longitude);
+            this.cargarMapa()
 
             this.error = false;
           } else {
@@ -131,13 +139,15 @@ export class PropertiesDetailsComponent implements OnInit {
         });
   }
 
-  cargarMapa(lat, lng) {
+  cargarMapa = () => {
+    const coords = this.property.ubication.location.coordinates
+    console.log(coords)
     mapboxgl.accessToken =
       'pk.eyJ1IjoiaXZhbm92aWNzb2xhcm8iLCJhIjoiY2p4czR6YWQxMGc2MjNtcGJoeDMxc2ZhMiJ9.OkBNDx2o55HKTevT6UqCNw';
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v9',
-      center: [lng, lat],
+      center: coords,
       zoom: 11.5,
     });
 
@@ -151,28 +161,28 @@ export class PropertiesDetailsComponent implements OnInit {
       data: new Uint8Array(size * size * 4),
 
       // get rendering context for the map canvas when layer is added to the map
-      onAdd: function () {
+      onAdd: () => {
         const canvas = document.createElement('canvas');
-        canvas.width = this.width;
-        canvas.height = this.height;
-        this.context = canvas.getContext('2d');
+        canvas.width = this.mapboxConfig.width;
+        canvas.height = this.mapboxConfig.height;
+        this.mapboxConfig.context = canvas.getContext('2d');
       },
 
       // called once before every frame where the icon will be used
-      render: function () {
+      render: () => {
         const duration = 1000;
         const t = (performance.now() % duration) / duration;
 
         const radius = (size / 2) * 0.3;
         const outerRadius = (size / 2) * 0.7 * t + radius;
-        const context = this.context;
+        const context = this.mapboxConfig.context;
 
         // draw outer circle
-        context.clearRect(0, 0, this.width, this.height);
+        context.clearRect(0, 0, this.mapboxConfig.width, this.mapboxConfig.height);
         context.beginPath();
         context.arc(
-          this.width / 2,
-          this.height / 2,
+          this.mapboxConfig.width / 2,
+          this.mapboxConfig.height / 2,
           outerRadius,
           0,
           Math.PI * 2
@@ -182,7 +192,7 @@ export class PropertiesDetailsComponent implements OnInit {
 
         // draw inner circle
         context.beginPath();
-        context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+        context.arc(this.mapboxConfig.width / 2, this.mapboxConfig.height / 2, radius, 0, Math.PI * 2);
         context.fillStyle = 'rgba(255, 100, 100, 0.31)';
         context.strokeStyle = 'white';
         context.lineWidth = 2 + 4 * (1 - t);
@@ -190,7 +200,7 @@ export class PropertiesDetailsComponent implements OnInit {
         context.stroke();
 
         // update this image's data with data from the canvas
-        this.data = context.getImageData(0, 0, this.width, this.height).data;
+        this.mapboxConfig.data = context.getImageData(0, 0, this.mapboxConfig.width, this.mapboxConfig.height).data;
 
         // continuously repaint the map, resulting in the smooth animation of the dot
         map.triggerRepaint();
@@ -201,7 +211,11 @@ export class PropertiesDetailsComponent implements OnInit {
     };
 
     map.on('load', () => {
-      map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+      // Create a default Marker, colored black, rotated 45 degrees.
+    const marker2 = new mapboxgl.Marker({ color: '#c20e1a' })
+    .setLngLat(coords)
+    .addTo(map);
+      /* map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
 
       map.addLayer({
         id: 'points',
@@ -215,7 +229,7 @@ export class PropertiesDetailsComponent implements OnInit {
                 type: 'Feature',
                 geometry: {
                   type: 'Point',
-                  coordinates: [lng, lat],
+                  coordinates: coords,
                 },
               },
             ],
@@ -224,7 +238,7 @@ export class PropertiesDetailsComponent implements OnInit {
         layout: {
           'icon-image': 'pulsing-dot',
         },
-      });
+      }); */
     });
   }
 
@@ -274,7 +288,7 @@ export class PropertiesDetailsComponent implements OnInit {
     popupWin.document.open();
     popupWin.document.write(`
   <html>
-
+  <link rel="stylesheet" href="./assets/css/style.css" />
 <body onload='window.print();window.close()'>${printContents}</body>
   </html>`);
     popupWin.document.close();
@@ -287,13 +301,29 @@ export class PropertiesDetailsComponent implements OnInit {
   }
 
 
-  _getValueCharByName( name: string) {
+  _getValueCharByName = ( name: string) => {
     const chars = this.property.characteristics;
-    const response = chars.filter(c => c.name === name)[0].value.toString();
-    if (response) {
-      return response;
+    const response = chars.filter(c => c.name === name);
+    if (response.length > 0) {
+      return response[0].value.toString();
     } else {
-      return '-';
+      return '0';
+    }
+  }
+
+  getCurrencySecondary() {
+    if (this.property.currency === 'UF') {
+      return 'CLP';
+    } else {
+      return 'UF';
+    }
+  }
+
+  getValueSecondary() {
+    if (this.property.currency === 'UF') {
+      return this.property.value * this.ufValue;
+    } else {
+      return this.property.value / this.ufValue;
     }
   }
 }
