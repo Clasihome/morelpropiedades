@@ -114,7 +114,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
      
       this.code = code;
 
-      this.order = order.toString().toLowerCase();
+      this.order = order;
       this.order_by = order_by;
       this.currentPage = page;
       this.properties = [];

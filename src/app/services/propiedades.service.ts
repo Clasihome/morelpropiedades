@@ -47,7 +47,7 @@ export class PropiedadesService {
     condominiumName = this.validateQuery(condominiumName, '&condominiumName=');
     proyecto = this.validateQuery(proyecto, '&proyecto=');
     code = this.validateQuery(code, '&stringSearch=');
-    order = this.validateQuery(order, '&sortOrder=');
+    order = this.validateQuery(order.toString().toLowerCase(), '&sortOrder=');
  
     // tslint:disable-next-line: max-line-length
     return this.http.get<RespPropiedades>(`${this.URL}${idcomune}${type}${estado}&page=${pagina}${preMin}${preMax}${supMin}${supMax}${sector}${condominium}${condominiumName}${proyecto}${code}${order}&sortBy=uf&currency=UF&limit=8`);
