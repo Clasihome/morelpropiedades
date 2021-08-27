@@ -11,12 +11,10 @@ export class FormatCurrencyPipe implements PipeTransform {
 
     switch (currency) {
       case 'UF':
-        numb = 'UF ' +
-          (Math.round(value * 100) / 100
-        ).toFixed(2).replace('.',',').replace(',00', '');
+        numb = 'UF ' + new Intl.NumberFormat('de-DE').format(Math.round(value * 100) / 100);
         break;
       case 'CLP':
-         const roundValue = (Math.round(value * 100) / 100);
+         const roundValue = parseInt((Math.round(value * 100) / 100).toFixed(2).replace('.',',').replace(',00', ''));
          numb = '$' +  new Intl.NumberFormat('de-DE').format(roundValue);
          break;
 

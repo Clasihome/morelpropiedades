@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
     this.router.navigate([
       // tslint:disable-next-line:max-line-length
-      `/properties/${this.idComune}/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.condominios_check}/null/${this.code}/precio/DESC/0`,
+      `/properties/all/${this.type}/${this.status}/${this.sectorId}/${this.condominio}/${this.currency}/${this.pre_min}/${this.pre_max}/${this.condominios_check}/null/${this.code}/precio/DESC/0`,
     ]);
   }
 
@@ -92,8 +92,8 @@ export class HomeComponent implements OnInit {
 
   selectEvent(item) {
     console.log(item)
-    this.idComune = item.leyenda.split(" - ")[0];
-    this.sectorId = item.leyenda.split(" - ")[1];
+    this.sectorId = item.leyenda.split(" - ")[0];
+    this.condominio = item.leyenda.split(" - ")[1];
   }
 
   changeStatus(event) {
