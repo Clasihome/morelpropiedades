@@ -5,7 +5,7 @@
 class="listing-img-container"
 >
 <div class="listing-badges">
-  <span class="featured {{p.status}}">{{ p.status | formatStatus }}</span>
+  <span class="featured {{p.status}}" *ngIf="p.status != 'PUBLICADA'">{{ p.status | formatStatus }}</span>
   <span>{{ p.operation }}</span>
 </div>
 
@@ -73,7 +73,7 @@ class="listing-img-container"
   class="listing-img-container"
   >
     <div class="listing-badges">
-      <span class="featured {{p.status}}">{{ p.status | formatStatus }}</span>
+      <span class="featured {{p.status}}" *ngIf="p.status != 'PUBLICADA'">{{ p.status | formatStatus }}</span>
       <span>{{ p.operation }}</span>
     </div>
 

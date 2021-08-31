@@ -61,12 +61,12 @@ export class PropiedadesService {
     if (pagina === undefined) {
       pagina = 0;
     }
-    return this.http.get<RespPropiedades>(`${this.URL}&page=${pagina}&proyecto=true&limit=8`);
+    return this.http.get<RespPropiedades>(`${this.URL}&page=${pagina}&project=true&limit=8`);
   }
 
   getFeatured(cantidad?: number) {
     // tslint:disable-next-line:max-line-length
-    return this.http.get<RespPropiedades>(`${this.URL}/propiedades/destacadas/${this.apiKey}&perpage=${this.cUltimasPropiedades}`);
+    return this.http.get<RespPropiedades>(`${this.URL}&featured=true&limit=15`);
   }
 
   validateQuery(value, query) {

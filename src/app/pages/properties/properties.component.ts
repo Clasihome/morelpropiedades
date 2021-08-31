@@ -35,6 +35,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   lastPage;
   previousPage;
   currentPage;
+  currentPageLegend;
+  lastPageLegend;
   loadingProperties = false;
   nextPage;
   results: number;
@@ -128,7 +130,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         this.previousPage = this.currentPage == "0" ? 0 : parseInt(this.currentPage) - 1;
         this.nextPage = resp.hasMore >  0 ? parseInt(this.currentPage) + 1 : parseInt(this.currentPage);
         this.properties = resp.properties;
-        
+        this.currentPageLegend = parseInt(this.currentPage) + 1;
+        this.lastPageLegend = parseInt(this.lastPage) + 1;
         this.loadingProperties = false;
       });
     });
